@@ -1,0 +1,9 @@
+$config: mat-typography-config();
+mat-toolbar {
+  .mat-toolbar__title.mat-toolbar__title {
+    font-weight: bolder;
+  }
+  .mat-toolbar__buttons {
+    margin-left: auto;
+  }
+}
