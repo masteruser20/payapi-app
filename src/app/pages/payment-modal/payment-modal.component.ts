@@ -12,7 +12,9 @@ export enum PAYMENT_METHOD {
 
 enum PAYMENT_STEPS {
     PAYMENT_METHOD_SELECT,
-    USER_DATA
+    USER_DATA,
+    TRANSACTION_DETAILS,
+    TRANSACTION_ADDITIONAL_DATA
 }
 
 @Component({
@@ -26,7 +28,7 @@ export class PaymentModalComponent implements OnInit {
     PAYMENT_STEPS = PAYMENT_STEPS;
     paymentServices: Observable<PaymentMethod[]>;
     step = PAYMENT_STEPS.PAYMENT_METHOD_SELECT;
-    matcher = new ErrorStateMatcher();
+
     constructor(private paymentMethodsService: PaymentMethodsService) {
     }
 
@@ -38,5 +40,9 @@ export class PaymentModalComponent implements OnInit {
     onChoosePaymentMethod(paymentMethod: PAYMENT_METHOD) {
         this.paymentMethod = paymentMethod;
         this.step = PAYMENT_STEPS.USER_DATA;
+    }
+
+    onGoToStep(step: PAYMENT_STEPS) {
+        this.step = step;
     }
 }

@@ -73,10 +73,25 @@
 
                 <div class="modal__buttons">
                     <button class="modal__buttons--next" color="warn" mat-raised-button
-                            (click)="onChoosePaymentMethod(PAYMENT_METHOD.DEPOSIT)">Next
+                            (click)="onGoToStep(PAYMENT_STEPS.TRANSACTION_DETAILS)">Next
                     </button>
                 </div>
             </form>
+        </div>
+        <div class="modal__transaction-details" *ngSwitchCase="PAYMENT_STEPS.TRANSACTION_DETAILS">
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Amount">
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Currency" minlength="3" maxlength="3">
+            </mat-form-field>
+
+            <div class="modal__buttons">
+                <button class="modal__buttons--next" color="warn" mat-raised-button
+                        (click)="onGoToStep(PAYMENT_STEPS.TRANSACTION_ADDITIONAL_DATA)">Next
+                </button>
+            </div>
         </div>
     </div>
 </div>
