@@ -1,19 +1,44 @@
 .modal {
   .modal__buttons {
     display: flex;
+
     button {
       &.modal__buttons--choose-method {
         margin: 10px;
       }
     }
-    ul.modal__buttons__payment-services {
+
+    &__payment-services {
       list-style: none;
       padding: 0;
       margin: 0 auto;
+
       li {
         text-align: center;
         font-weight: bolder;
       }
     }
+  }
+
+  .modal__user-form {
+    display: flex;
+    flex-direction: column;
+    mat-form-field {
+      margin-top: 5px;
+    }
+    &__field {
+      &--gender {
+        mat-radio-group {
+          mat-radio-button {
+          }
+        }
+      }
+    }
+    .modal__buttons {
+        &--next {
+          margin-left: auto;
+        }
+    }
+
   }
 }

@@ -1,28 +1,82 @@
 <div class="modal">
-    <div class="modal__buttons">
-        <div class="modal_buttons__column">
-            <button class="modal__buttons--choose-method" color="warn" mat-stroked-button
-                    (click)="onChoosePaymentMethod(PAYMENT_METHOD.DEPOSIT)">Deposit
-            </button>
-            <ul class="modal__buttons__payment-services">
-                <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
-                    <li *ngIf="paymentService.types.indexOf('deposit') > -1">
-                        {{paymentService.name}}
-                    </li>
-                </ng-container>
-            </ul>
+    <div [ngSwitch]="step">
+        <div class="modal__buttons" *ngSwitchCase="PAYMENT_STEPS.PAYMENT_METHOD_SELECT">
+            <div class="modal_buttons__column">
+                <button class="modal__buttons--choose-method" color="warn" mat-stroked-button
+                        (click)="onChoosePaymentMethod(PAYMENT_METHOD.DEPOSIT)">Deposit
+                </button>
+                <ul class="modal__buttons__payment-services">
+                    <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
+                        <li *ngIf="paymentService.types.indexOf('deposit') > -1">
+                            {{paymentService.name}}
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+            <div class="modal_buttons__column">
+                <button class="modal__buttons--choose-method" color="warn" mat-stroked-button
+                        (click)="onChoosePaymentMethod(PAYMENT_METHOD.WITHDRAW)">Withdraw
+                </button>
+                <ul class="modal__buttons__payment-services">
+                    <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
+                        <li *ngIf="paymentService.types.indexOf('withdraw') > -1">
+                            {{paymentService.name}}
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
         </div>
-        <div class="modal_buttons__column">
-            <button class="modal__buttons--choose-method" color="warn" mat-stroked-button
-                    (click)="onChoosePaymentMethod(PAYMENT_METHOD.WITHDRAW)">Withdraw
-            </button>
-            <ul class="modal__buttons__payment-services">
-                <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
-                    <li *ngIf="paymentService.types.indexOf('withdraw') > -1">
-                        {{paymentService.name}}
-                    </li>
-                </ng-container>
-            </ul>
+        <div class="modal__user-form" *ngSwitchCase="PAYMENT_STEPS.USER_DATA">
+            <form class="example-form">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="First Name">
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Last Name">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a birthday">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Address">
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="City">
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Zip">
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Country code" maxlength="2">
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Email" type="email">
+                </mat-form-field>
+
+
+                <div class="m-t-20 form__field--gender">
+                    <label>Gender: </label>
+                    <mat-radio-group>
+                        <mat-radio-button class="p-r-10" value="M">Male</mat-radio-button>
+                        <mat-radio-button value="F">Female</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="modal__buttons">
+                    <button class="modal__buttons--next" color="warn" mat-raised-button
+                            (click)="onChoosePaymentMethod(PAYMENT_METHOD.DEPOSIT)">Next
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
