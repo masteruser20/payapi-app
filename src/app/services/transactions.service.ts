@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {Transaction} from "../models/Transaction";
 import * as env from "../../environments/environment";
 import {map} from "rxjs/operators";
+import {ITransactionData} from "../classes/interfaces/ITransactionData";
 
 @Injectable({
     providedIn: 'root'
@@ -42,5 +43,9 @@ export class TransactionsService {
         }, error => {
             console.log(error);
         });
+    }
+
+    createTransaction(transaction: ITransactionData): Observable<any> {
+        return this.httpClient.post(`${env.environment.apiUrl}/transactions`, transaction);
     }
 }

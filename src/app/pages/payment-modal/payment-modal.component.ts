@@ -72,6 +72,10 @@ export class PaymentModalComponent implements OnInit {
     }
 
     onFinish() {
-        console.log(this.transactionBuilder.transaction);
+        this.transactionsService.createTransaction(this.transactionBuilder.transaction).subscribe((result) => {
+            console.log(result);
+        }, error => {
+            console.log(error);
+        });
     }
 }
