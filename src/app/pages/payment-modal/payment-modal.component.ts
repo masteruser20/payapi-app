@@ -3,6 +3,7 @@ import {PaymentMethodsService} from "../../services/payment-methods.service";
 import {PaymentMethod} from "../../models/PaymentMethod";
 import {Observable} from "rxjs";
 import {ErrorStateMatcher} from "@angular/material";
+import {TransactionsService} from "../../services/transactions.service";
 
 
 export enum PAYMENT_METHOD {
@@ -30,7 +31,7 @@ export class PaymentModalComponent implements OnInit {
     step = PAYMENT_STEPS.PAYMENT_METHOD_SELECT;
     paymentProvider: PaymentMethod;
 
-    constructor(private paymentMethodsService: PaymentMethodsService) {
+    constructor(private paymentMethodsService: PaymentMethodsService, private transactionsService: TransactionsService) {
     }
 
     async ngOnInit() {
@@ -46,5 +47,8 @@ export class PaymentModalComponent implements OnInit {
 
     onGoToStep(step: PAYMENT_STEPS) {
         this.step = step;
+    }
+
+    onFinish() {
     }
 }

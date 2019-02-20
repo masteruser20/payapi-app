@@ -89,5 +89,18 @@
                 </button>
             </div>
         </div>
+        <div class="modal__transaction_additional_data" *ngSwitchCase="PAYMENT_STEPS.TRANSACTION_ADDITIONAL_DATA">
+
+            <mat-form-field *ngFor="let field of paymentProvider.additionalData" class="full-width">
+                <input *ngIf="field.type === 'text'" matInput type="text" placeholder="{{ field.label }}">
+                <input *ngIf="field.type === 'password'" matInput type="password" placeholder="{{ field.label }}">
+            </mat-form-field>
+
+            <div class="modal__buttons">
+                <button class="modal__buttons--next" color="warn" mat-raised-button
+                        (click)="onFinish()">Finish
+                </button>
+            </div>
+        </div>
     </div>
 </div>
