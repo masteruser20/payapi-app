@@ -1,30 +1,26 @@
 <div class="modal">
     <div [ngSwitch]="step">
         <div class="modal__buttons" *ngSwitchCase="PAYMENT_STEPS.PAYMENT_METHOD_SELECT">
-            <div class="modal_buttons__column">
-                <button class="modal__buttons--choose-method" color="warn" mat-stroked-button
-                        (click)="onChoosePaymentMethod(PAYMENT_METHOD.DEPOSIT)">Deposit
-                </button>
-                <ul class="modal__buttons__payment-services">
-                    <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
-                        <li *ngIf="paymentService.types.indexOf('deposit') > -1">
-                            {{paymentService.name}}
-                        </li>
-                    </ng-container>
-                </ul>
-            </div>
-            <div class="modal_buttons__column">
-                <button class="modal__buttons--choose-method" color="warn" mat-stroked-button
-                        (click)="onChoosePaymentMethod(PAYMENT_METHOD.WITHDRAW)">Withdraw
-                </button>
-                <ul class="modal__buttons__payment-services">
-                    <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
-                        <li *ngIf="paymentService.types.indexOf('withdraw') > -1">
-                            {{paymentService.name}}
-                        </li>
-                    </ng-container>
-                </ul>
-            </div>
+            <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
+                <div class="providers">
+                    <div class="providers__row">
+                        <div class="providers__col">
+                            <span class="mat-title no-margin">{{ paymentService.label }}</span>
+                        </div>
+                        <div class="providers__separator"></div>
+                        <div class="providers__col">
+                            <button class="providers__choose-btn" color="warn" mat-stroked-button
+                                    (click)="onChoosePaymentMethod(paymentService, PAYMENT_METHOD.WITHDRAW)">
+                                Withdraw
+                            </button>
+                            <button class="providers__choose-btn" color="warn" mat-stroked-button
+                                    (click)="onChoosePaymentMethod(paymentService, PAYMENT_METHOD.DEPOSIT)">Deposit
+                            </button>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+            </ng-container>
         </div>
         <div class="modal__user-form" *ngSwitchCase="PAYMENT_STEPS.USER_DATA">
             <form class="example-form">
@@ -63,7 +59,7 @@
                 </mat-form-field>
 
 
-                <div class="m-t-20 form__field--gender">
+                <div class="m-t-20 m-b-20 form__field--gender">
                     <label>Gender: </label>
                     <mat-radio-group>
                         <mat-radio-button class="p-r-10" value="M">Male</mat-radio-button>

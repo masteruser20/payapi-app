@@ -28,6 +28,7 @@ export class PaymentModalComponent implements OnInit {
     PAYMENT_STEPS = PAYMENT_STEPS;
     paymentServices: Observable<PaymentMethod[]>;
     step = PAYMENT_STEPS.PAYMENT_METHOD_SELECT;
+    paymentProvider: PaymentMethod;
 
     constructor(private paymentMethodsService: PaymentMethodsService) {
     }
@@ -37,8 +38,9 @@ export class PaymentModalComponent implements OnInit {
         this.paymentServices = this.paymentMethodsService.paymentMethods;
     }
 
-    onChoosePaymentMethod(paymentMethod: PAYMENT_METHOD) {
+    onChoosePaymentMethod(paymentProvider: PaymentMethod, paymentMethod: PAYMENT_METHOD) {
         this.paymentMethod = paymentMethod;
+        this.paymentProvider = paymentProvider;
         this.step = PAYMENT_STEPS.USER_DATA;
     }
 

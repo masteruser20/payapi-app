@@ -1,46 +1,30 @@
 .modal {
   &__buttons {
-    &--next {
-      margin-left: auto;
-    }
-  }
-
-  .modal__buttons {
     display: flex;
-
-    button {
-      &.modal__buttons--choose-method {
-        margin: 10px;
-      }
-    }
-
-    &__payment-services {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-
-      li {
-        text-align: center;
-        font-weight: bolder;
-      }
-    }
+    flex-direction: column;
   }
 
   &__user-form {
     display: flex;
     flex-direction: column;
-
     mat-form-field {
       margin-top: 5px;
     }
+  }
+}
 
-    &__field {
-      &--gender {
-        mat-radio-group {
-          mat-radio-button {
-          }
-        }
-      }
+.providers {
+  &__separator {
+    width: 50px;
+  }
+  &__col {
+    display: flex;
+    width: 50%;
+    .providers__choose-btn:nth-child(2) {
+      margin-left:20px;
     }
+  }
+  &__row {
+    display: flex;
   }
 }
