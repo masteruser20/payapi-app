@@ -23,45 +23,45 @@
             </ng-container>
         </div>
         <div class="modal__user-form" *ngSwitchCase="PAYMENT_STEPS.USER_DATA">
-            <form class="example-form">
+            <div>
                 <mat-form-field class="full-width">
-                    <input matInput placeholder="First Name">
+                    <input [(ngModel)]="userObject.first_name" matInput placeholder="First Name">
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
-                    <input matInput placeholder="Last Name">
+                    <input [(ngModel)]="userObject.last_name" matInput placeholder="Last Name">
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput [matDatepicker]="picker" placeholder="Choose a birthday">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <input [(ngModel)]="userObject.birthday" matInput [matDatepicker]="datePicker" placeholder="Choose a birthday">
+                    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePicker></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
-                    <input matInput placeholder="Address">
+                    <input  [(ngModel)]="userObject.address" matInput placeholder="Address">
                 </mat-form-field>
 
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="City">
+                <mat-form-field   class="full-width">
+                    <input [(ngModel)]="userObject.city" matInput placeholder="City">
                 </mat-form-field>
 
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Zip">
+                <mat-form-field   class="full-width">
+                    <input [(ngModel)]="userObject.zip" matInput placeholder="Zip">
                 </mat-form-field>
 
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Country code" maxlength="2">
+                <mat-form-field  class="full-width">
+                    <input  [(ngModel)]="userObject.country_code" matInput placeholder="Country code" maxlength="2">
                 </mat-form-field>
 
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Email" type="email">
+                <mat-form-field   class="full-width">
+                    <input [(ngModel)]="userObject.email" matInput placeholder="Email" type="email">
                 </mat-form-field>
 
 
                 <div class="m-t-20 m-b-20 form__field--gender">
                     <label>Gender: </label>
-                    <mat-radio-group>
+                    <mat-radio-group  [(ngModel)]="userObject.gender">
                         <mat-radio-button class="p-r-10" value="M">Male</mat-radio-button>
                         <mat-radio-button value="F">Female</mat-radio-button>
                     </mat-radio-group>
@@ -72,15 +72,15 @@
                             (click)="onGoToStep(PAYMENT_STEPS.TRANSACTION_DETAILS)">Next
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="modal__transaction-details" *ngSwitchCase="PAYMENT_STEPS.TRANSACTION_DETAILS">
             <mat-form-field class="full-width">
-                <input matInput placeholder="Amount">
+                <input [(ngModel)]="transactionObject.amount" matInput placeholder="Amount">
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <input matInput placeholder="Currency" minlength="3" maxlength="3">
+                <input [(ngModel)]="transactionObject.currency" matInput placeholder="Currency" minlength="3" maxlength="3">
             </mat-form-field>
 
             <div class="modal__buttons">
@@ -92,8 +92,8 @@
         <div class="modal__transaction_additional_data" *ngSwitchCase="PAYMENT_STEPS.TRANSACTION_ADDITIONAL_DATA">
 
             <mat-form-field *ngFor="let field of paymentProvider.additionalData" class="full-width">
-                <input *ngIf="field.type === 'text'" matInput type="text" placeholder="{{ field.label }}">
-                <input *ngIf="field.type === 'password'" matInput type="password" placeholder="{{ field.label }}">
+                <input *ngIf="field.type === 'text'" [(ngModel)]="transactionAdditionalData[field.name]" matInput type="text" placeholder="{{ field.label }}">
+                <input *ngIf="field.type === 'password'" [(ngModel)]="transactionAdditionalData[field.name]" matInput type="password" placeholder="{{ field.label }}">
             </mat-form-field>
 
             <div class="modal__buttons">

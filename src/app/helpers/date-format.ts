@@ -5,7 +5,7 @@ export const MAT_MOMENT_DATE_FORMAT: MatDateFormats = {
         dateInput: 'LL',
     },
     display: {
-        dateInput: 'YYYY/MM/DD',
+        dateInput: 'YYYY-MM-DD',
         monthYearLabel: 'MMM YYYY',
         dateA11yLabel: 'LL',
         monthYearA11yLabel: 'MMMM YYYY',
