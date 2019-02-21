@@ -9,6 +9,7 @@ import {ITransactionData} from "../../classes/interfaces/ITransactionData";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
 import {HttpErrorResponse} from "@angular/common/http";
+import {LoaderController} from "../../helpers/loader-controller";
 
 
 export enum PAYMENT_METHOD {
@@ -43,7 +44,11 @@ export class PaymentModalComponent implements OnInit {
     transactionAdditionalData = {};
     errors: any = {};
 
-    constructor(private paymentMethodsService: PaymentMethodsService, private transactionsService: TransactionsService, private router: Router, private matDialog: MatDialog) {
+    constructor(private paymentMethodsService: PaymentMethodsService,
+                private transactionsService: TransactionsService,
+                private router: Router,
+                private matDialog: MatDialog,
+                private loadCtrl: LoaderController) {
     }
 
     async ngOnInit() {
@@ -77,10 +82,13 @@ export class PaymentModalComponent implements OnInit {
     }
 
     onFinish() {
+        this.loadCtrl.presetLoader();
         this.transactionsService.createTransaction(this.transactionBuilder.transaction).subscribe((result) => {
             this.router.navigate(['/summarize', { status: result.status }]);
             this.matDialog.closeAll();
+            this.loadCtrl.hideLoader();
         }, (error: HttpErrorResponse)  => {
+            this.loadCtrl.hideLoader();
             if(error.status === 422) {
                 this.errors = error.error.validation_messages;
                 if(this.errors.user) {

@@ -18,6 +18,10 @@ export class PaymentMethodsService {
     }
 
     getPaymentMethods(): Subscription {
+        if(this._paymentMethods.value.length) {
+            return null;
+        }
+
         return this.httpClient.get(environment.apiUrl + '/methods').pipe(map((result: any) => {
             return result.map((paymentMethod) => {
                 return new PaymentMethod(

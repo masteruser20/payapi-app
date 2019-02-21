@@ -1,8 +1,9 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Transaction} from "../../models/Transaction";
-import {MatPaginator,  MatSort, PageEvent, Sort} from "@angular/material";
+import {MatPaginator, MatSort, PageEvent, Sort} from "@angular/material";
 import {ITransactionsBaseService} from "../../classes/interfaces/ITransactionsBaseService";
+import {LoaderController} from "../../helpers/loader-controller";
 
 
 @Component({
@@ -22,7 +23,6 @@ export class TransactionsListComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
     @Input() transactionsService: ITransactionsBaseService;
 
-    isLoadingResults = true;
     transactions: any;
     columnsToDisplay = ['id', 'status', 'type', 'amount'];
     expandedElement: Transaction | null;
@@ -35,8 +35,15 @@ export class TransactionsListComponent implements OnInit {
         filter: '',
     };
 
+    constructor(private loadingCtrl: LoaderController) {
+
+    }
+
     ngOnInit(): void {
-        this.fetchTransactions();
+        // timeout to prevent for ExpressionChangedAfterItHasBeenCheckedError
+        setTimeout(() => {
+            this.fetchTransactions();
+        });
         this.transactions = this.transactionsService.transactions;
         this.transactions.sort = this.sort;
     }
@@ -48,11 +55,10 @@ export class TransactionsListComponent implements OnInit {
     }
 
     fetchTransactions(): void {
-        this.isLoadingResults = true;
+        this.loadingCtrl.presetLoader();
         this.transactionsService.loadTransactions(this.filters).subscribe((result) => {
-            this.isLoadingResults = false;
+            this.loadingCtrl.hideLoader();
             this.totalCount = result.count;
-            console.log(this.totalCount);
         });
     }
 

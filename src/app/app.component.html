@@ -2,3 +2,10 @@
     <app-header-bar></app-header-bar>
     <router-outlet></router-outlet>
 </div>
+
+<div class="transaction-loading-shade"
+     *ngIf="loaderCtrl.isLoading">
+    <mat-spinner color="accent" *ngIf="loaderCtrl.isLoading"></mat-spinner>
+    <div class="transaction-limit">
+    </div>
+</div>

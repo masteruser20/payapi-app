@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {LoaderController} from "./helpers/loader-controller";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
+  constructor(public loaderCtrl: LoaderController) {
+
+  }
 }
