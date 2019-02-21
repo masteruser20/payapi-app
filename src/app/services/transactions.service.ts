@@ -40,6 +40,9 @@ export class TransactionsService implements ITransactionsBaseService {
                     transaction.status,
                     transaction.amount,
                     transaction.currency,
+                    transaction.start_time,
+                    transaction.end_time,
+                    transaction.attributes
                 )
             })
         })).subscribe(data => {
