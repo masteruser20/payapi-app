@@ -4,10 +4,17 @@ import {AppComponent} from './app.component';
 import {HeaderBarComponent} from './components/header-bar/header-bar.component';
 import {
     MAT_DATE_FORMATS,
-    MatButtonModule, MatDatepickerModule,
+    MatButtonModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
-    MatFormFieldModule, MatInputModule, MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule, MatOptionModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSortModule,
     MatTableModule,
     MatToolbarModule
 } from "@angular/material";
@@ -51,7 +58,12 @@ import {MAT_MOMENT_DATE_FORMAT} from "./helpers/date-format";
         MatInputModule,
         MatRadioModule,
         MatMomentDateModule,
-        MomentDateModule
+        MomentDateModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatSelectModule,
+        MatOptionModule
     ],
     providers: [
         {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMAT}
