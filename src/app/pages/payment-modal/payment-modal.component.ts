@@ -20,7 +20,8 @@ enum PAYMENT_STEPS {
     PAYMENT_METHOD_SELECT,
     USER_DATA,
     TRANSACTION_DETAILS,
-    TRANSACTION_ADDITIONAL_DATA
+    TRANSACTION_ADDITIONAL_DATA,
+    FINISH
 }
 
 @Component({
@@ -69,7 +70,7 @@ export class PaymentModalComponent implements OnInit {
                 break;
             case PAYMENT_STEPS.TRANSACTION_ADDITIONAL_DATA:
                 this.transactionBuilder.setAdditionalData(this.transactionAdditionalData);
-                break;
+                return this.onFinish();
         }
 
         this.step = step;
