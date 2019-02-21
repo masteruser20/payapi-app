@@ -30,7 +30,7 @@ export class TransactionsListComponent implements OnInit {
     filterData: any = {};
     private filters = {
         page: 1,
-        limit: 2,
+        limit: 10,
         sort: '',
         filter: '',
     };
@@ -51,10 +51,8 @@ export class TransactionsListComponent implements OnInit {
         this.isLoadingResults = true;
         this.transactionsService.loadTransactions(this.filters).subscribe((result) => {
             this.isLoadingResults = false;
-            this.totalCount = Math.ceil(result.count / this.filters.limit);
-            this.paginator.initialized.subscribe(result => {
-                console.log(result);
-            })
+            this.totalCount = result.count;
+            console.log(this.totalCount);
         });
     }
 
@@ -68,5 +66,9 @@ export class TransactionsListComponent implements OnInit {
             this.filters.filter = `[${[this.filterData.key]}]=${this.filterData.value}`;
             this.fetchTransactions();
         }
+    }
+
+    isObject(value: any) {
+        return typeof value === 'object';
     }
 }

@@ -22,7 +22,18 @@
                 <div class="transaction-element__diagram">
                     <div class="transaction-element__value " *ngFor="let item of element | keyvalue">
                         <mat-divider></mat-divider>
-                        <div class="mat-title no-margin">{{item.key}}: <b>{{item.value}}</b></div>
+                        <div class="mat-title no-margin">{{item.key}}:
+                            <ng-container *ngIf="isObject(item.value)">
+                                <div class="m-l-20">
+                                    <ng-container *ngFor="let data of item.value | keyvalue">
+                                        {{ data.key }}: <b>{{ data.value }}</b> <br>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!isObject(item.value)">
+                                <b>{{item.value}}</b>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -31,7 +42,7 @@
 
     <!-- Disclaimer column -->
     <ng-container matColumnDef="disclaimer">
-        <td mat-footer-cell *matFooterCellDef  colspan="2">
+        <td mat-footer-cell *matFooterCellDef colspan="2">
             <mat-select [(ngModel)]="filterData.key" placeholder="Filter option">
                 <mat-option *ngFor="let column of columnsToDisplay" [value]="column">
                     {{ column }}
@@ -66,4 +77,5 @@
 
 </table>
 
-<mat-paginator pageSize="1" pageIndex="0" [length]="totalCount"  [pageSizeOptions]="[5, 10, 20]" (page)="onNextPage($event)"></mat-paginator>
+<mat-paginator [pageSize]="filters.limit" [length]="totalCount" [pageSizeOptions]="[5, 10, 20]"
+               (page)="onNextPage($event)"></mat-paginator>
