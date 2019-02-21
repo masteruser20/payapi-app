@@ -1,10 +1,12 @@
+@import '../../../styles.scss';
+
 .content {
   background-color: white;
   padding: 30px;
 
   &__information {
     .status {
-      color: red;
+      color: $accent;
     }
   }
 }

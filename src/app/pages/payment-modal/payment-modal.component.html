@@ -26,45 +26,57 @@
             <div>
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.first_name" matInput placeholder="First Name">
+                    <mat-hint [hidden]="!errors.user?.first_name">{{ errors.user?.first_name.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.last_name" matInput placeholder="Last Name">
+                    <mat-hint [hidden]="!errors.user?.last_name">{{ errors.user?.last_name.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input [(ngModel)]="userObject.birthday" matInput [matDatepicker]="datePicker" placeholder="Choose a birthday">
+                    <input [(ngModel)]="userObject.birthday" matInput [matDatepicker]="datePicker"
+                           placeholder="Choose a birthday">
                     <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                     <mat-datepicker #datePicker></mat-datepicker>
+                    <mat-hint [hidden]="!errors.user?.birthday">{{ errors.user?.birthday.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
-                    <input  [(ngModel)]="userObject.address" matInput placeholder="Address">
+                    <input [(ngModel)]="userObject.address" matInput placeholder="Address">
+                    <mat-hint [hidden]="!errors.user?.address">{{ errors.user?.address.isEmpty }}</mat-hint>
                 </mat-form-field>
 
-                <mat-form-field   class="full-width">
+                <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.city" matInput placeholder="City">
+                    <mat-hint [hidden]="!errors.user?.city">{{ errors.user?.city.isEmpty }}</mat-hint>
                 </mat-form-field>
 
-                <mat-form-field   class="full-width">
+                <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.zip" matInput placeholder="Zip">
+                    <mat-hint [hidden]="!errors.user?.zip">{{ errors.user?.zip.isEmpty }}</mat-hint>
                 </mat-form-field>
 
-                <mat-form-field  class="full-width">
-                    <input  [(ngModel)]="userObject.country_code" matInput placeholder="Country code" maxlength="2">
+                <mat-form-field class="full-width">
+                    <input [(ngModel)]="userObject.country_code" matInput placeholder="Country code" maxlength="2">
+                    <mat-hint [hidden]="!errors.user?.country_code">{{ errors.user?.country_code.isEmpty }}</mat-hint>
                 </mat-form-field>
 
-                <mat-form-field   class="full-width">
+                <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.email" matInput placeholder="Email" type="email">
+                    <mat-hint [hidden]="!errors.user?.email">{{ errors.user?.email.isEmpty }}</mat-hint>
                 </mat-form-field>
 
 
                 <div class="m-t-20 m-b-20 form__field--gender">
                     <label>Gender: </label>
-                    <mat-radio-group  [(ngModel)]="userObject.gender">
+                    <mat-radio-group [(ngModel)]="userObject.gender">
                         <mat-radio-button class="p-r-10" value="M">Male</mat-radio-button>
                         <mat-radio-button value="F">Female</mat-radio-button>
                     </mat-radio-group>
+                    <div>
+                        <mat-hint [hidden]="!errors.user?.gender">{{ errors.user?.gender.isEmpty }}</mat-hint>
+                    </div>
                 </div>
 
                 <div class="modal__buttons">
@@ -77,10 +89,13 @@
         <div class="modal__transaction-details" *ngSwitchCase="PAYMENT_STEPS.TRANSACTION_DETAILS">
             <mat-form-field class="full-width">
                 <input [(ngModel)]="transactionObject.amount" type="number" matInput placeholder="Amount">
+                <mat-hint [hidden]="!errors?.amount">{{ errors.amount?.isEmpty }}</mat-hint>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <input [(ngModel)]="transactionObject.currency" matInput placeholder="Currency" minlength="3" maxlength="3">
+                <input [(ngModel)]="transactionObject.currency" matInput placeholder="Currency" minlength="3"
+                       maxlength="3">
+                <mat-hint [hidden]="!errors?.currency">{{ errors.currency?.isEmpty }}</mat-hint>
             </mat-form-field>
 
             <div class="modal__buttons">
@@ -92,8 +107,10 @@
         <div class="modal__transaction_additional_data" *ngSwitchCase="PAYMENT_STEPS.TRANSACTION_ADDITIONAL_DATA">
 
             <mat-form-field *ngFor="let field of paymentProvider.additionalData" class="full-width">
-                <input *ngIf="field.type === 'text'" [(ngModel)]="transactionAdditionalData[field.name]" matInput type="text" placeholder="{{ field.label }}">
-                <input *ngIf="field.type === 'password'" [(ngModel)]="transactionAdditionalData[field.name]" matInput type="password" placeholder="{{ field.label }}">
+                <input *ngIf="field.type === 'text'" [(ngModel)]="transactionAdditionalData[field.name]" matInput
+                       type="text" placeholder="{{ field.label }}">
+                <input *ngIf="field.type === 'password'" [(ngModel)]="transactionAdditionalData[field.name]" matInput
+                       type="password" placeholder="{{ field.label }}">
             </mat-form-field>
 
             <div class="modal__buttons">

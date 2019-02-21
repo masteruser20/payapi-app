@@ -8,6 +8,7 @@ import {IUserData} from "../../classes/interfaces/IUserData";
 import {ITransactionData} from "../../classes/interfaces/ITransactionData";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 export enum PAYMENT_METHOD {
@@ -39,6 +40,7 @@ export class PaymentModalComponent implements OnInit {
     userObject: IUserData | any = {};
     transactionObject: ITransactionData | any = {};
     transactionAdditionalData = {};
+    errors: any = {};
 
     constructor(private paymentMethodsService: PaymentMethodsService, private transactionsService: TransactionsService, private router: Router, private matDialog: MatDialog) {
     }
@@ -77,7 +79,15 @@ export class PaymentModalComponent implements OnInit {
         this.transactionsService.createTransaction(this.transactionBuilder.transaction).subscribe((result) => {
             this.router.navigate(['/summarize', { status: result.status }]);
             this.matDialog.closeAll();
-        }, error => {
+        }, (error: HttpErrorResponse)  => {
+            if(error.status === 422) {
+                this.errors = error.error.validation_messages;
+                if(this.errors.user) {
+                    this.step = PAYMENT_STEPS.USER_DATA;
+                } else if(this.errors.amount || this.errors.currency) {
+                    this.step = PAYMENT_STEPS.TRANSACTION_DETAILS;
+                }
+            }
             console.log(error);
         });
     }
