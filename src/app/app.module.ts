@@ -33,7 +33,7 @@ import {MAT_MOMENT_DATE_FORMAT} from "./helpers/date-format";
         HeaderBarComponent,
         TransactionsListComponent,
         HomeComponent,
-        PaymentModalComponent
+        PaymentModalComponent,
     ],
     imports: [
         BrowserModule,

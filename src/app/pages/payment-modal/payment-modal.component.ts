@@ -6,6 +6,8 @@ import {TransactionsService} from "../../services/transactions.service";
 import {TransactionBuilder} from "../../classes/TransactionBuilder";
 import {IUserData} from "../../classes/interfaces/IUserData";
 import {ITransactionData} from "../../classes/interfaces/ITransactionData";
+import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material";
 
 
 export enum PAYMENT_METHOD {
@@ -38,7 +40,7 @@ export class PaymentModalComponent implements OnInit {
     transactionObject: ITransactionData | any = {};
     transactionAdditionalData = {};
 
-    constructor(private paymentMethodsService: PaymentMethodsService, private transactionsService: TransactionsService) {
+    constructor(private paymentMethodsService: PaymentMethodsService, private transactionsService: TransactionsService, private router: Router, private matDialog: MatDialog) {
     }
 
     async ngOnInit() {
@@ -73,7 +75,8 @@ export class PaymentModalComponent implements OnInit {
 
     onFinish() {
         this.transactionsService.createTransaction(this.transactionBuilder.transaction).subscribe((result) => {
-            console.log(result);
+            this.router.navigate(['/summarize', { status: result.status }]);
+            this.matDialog.closeAll();
         }, error => {
             console.log(error);
         });
