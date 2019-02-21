@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material";
 import {PaymentModalComponent} from "../../pages/payment-modal/payment-modal.component";
 

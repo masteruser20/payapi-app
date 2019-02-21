@@ -1,7 +1,7 @@
 <div class="modal">
     <div [ngSwitch]="step">
         <div class="modal__buttons" *ngSwitchCase="PAYMENT_STEPS.PAYMENT_METHOD_SELECT">
-            <ng-container *ngFor="let paymentService of paymentServices | async;  let i=index">
+            <ng-container *ngFor="let paymentService of paymentServices | async;">
                 <div class="providers">
                     <div class="providers__row">
                         <div class="providers__col">
@@ -26,12 +26,12 @@
             <div>
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.first_name" matInput placeholder="First Name">
-                    <mat-hint [hidden]="!errors.user?.first_name">{{ errors.user?.first_name.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.first_name">{{ errors.user.first_name?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.last_name" matInput placeholder="Last Name">
-                    <mat-hint [hidden]="!errors.user?.last_name">{{ errors.user?.last_name.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.last_name">{{ errors.user.last_name?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -39,32 +39,32 @@
                            placeholder="Choose a birthday">
                     <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                     <mat-datepicker #datePicker></mat-datepicker>
-                    <mat-hint [hidden]="!errors.user?.birthday">{{ errors.user?.birthday.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.birthday">{{ errors.user.birthday?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.address" matInput placeholder="Address">
-                    <mat-hint [hidden]="!errors.user?.address">{{ errors.user?.address.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.address">{{ errors.user.address?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.city" matInput placeholder="City">
-                    <mat-hint [hidden]="!errors.user?.city">{{ errors.user?.city.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.city">{{ errors.user.city?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.zip" matInput placeholder="Zip">
-                    <mat-hint [hidden]="!errors.user?.zip">{{ errors.user?.zip.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.zip">{{ errors.user.zip?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.country_code" matInput placeholder="Country code" maxlength="2">
-                    <mat-hint [hidden]="!errors.user?.country_code">{{ errors.user?.country_code.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.country_code">{{ errors.user.country_code?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
                     <input [(ngModel)]="userObject.email" matInput placeholder="Email" type="email">
-                    <mat-hint [hidden]="!errors.user?.email">{{ errors.user?.email.isEmpty }}</mat-hint>
+                    <mat-hint [hidden]="!errors.user.email">{{ errors.user.email?.isEmpty }}</mat-hint>
                 </mat-form-field>
 
 
@@ -75,7 +75,7 @@
                         <mat-radio-button value="F">Female</mat-radio-button>
                     </mat-radio-group>
                     <div>
-                        <mat-hint [hidden]="!errors.user?.gender">{{ errors.user?.gender.isEmpty }}</mat-hint>
+                        <mat-hint [hidden]="!errors.user.gender">{{ errors.user.gender?.isEmpty }}</mat-hint>
                     </div>
                 </div>
 

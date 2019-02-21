@@ -42,7 +42,7 @@ export class PaymentModalComponent implements OnInit {
     userObject: IUserData | any = {};
     transactionObject: ITransactionData | any = {};
     transactionAdditionalData = {};
-    errors: any = {};
+    errors: any = { user: {} };
 
     constructor(private paymentMethodsService: PaymentMethodsService,
                 private transactionsService: TransactionsService,
@@ -91,7 +91,7 @@ export class PaymentModalComponent implements OnInit {
             this.loadCtrl.hideLoader();
             if(error.status === 422) {
                 this.errors = error.error.validation_messages;
-                if(this.errors.user) {
+                if(this.errors.user && typeof this.errors.user === 'object') {
                     this.step = PAYMENT_STEPS.USER_DATA;
                 } else if(this.errors.amount || this.errors.currency) {
                     this.step = PAYMENT_STEPS.TRANSACTION_DETAILS;
