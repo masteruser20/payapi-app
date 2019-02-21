@@ -8,7 +8,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $app-primary: mat-palette($mat-gray,100);
-$app-accent:  mat-palette($mat-indigo, 500);
+$app-accent:  mat-palette($mat-gray, 500);
 $app-warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
