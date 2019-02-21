@@ -76,7 +76,7 @@
         </div>
         <div class="modal__transaction-details" *ngSwitchCase="PAYMENT_STEPS.TRANSACTION_DETAILS">
             <mat-form-field class="full-width">
-                <input [(ngModel)]="transactionObject.amount" matInput placeholder="Amount">
+                <input [(ngModel)]="transactionObject.amount" type="number" matInput placeholder="Amount">
             </mat-form-field>
 
             <mat-form-field class="full-width">
