@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PaymentMethod} from "../models/PaymentMethod";
 import {environment} from "../../environments/environment";
-import {map} from "rxjs/operators";
+import {map, share} from "rxjs/operators";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
 
 @Injectable({
@@ -17,12 +17,15 @@ export class PaymentMethodsService {
         this.paymentMethods = this._paymentMethods.asObservable();
     }
 
-    getPaymentMethods(): Subscription {
+    getPaymentMethods(): Observable<any> {
         if(this._paymentMethods.value.length) {
             return null;
         }
 
-        return this.httpClient.get(environment.apiUrl + '/methods').pipe(map((result: any) => {
+        const request = this.httpClient.get(environment.apiUrl + '/methods').pipe(share());
+
+        request.pipe(map((result: any) => {
+            console.log(result);
             return result.map((paymentMethod) => {
                 return new PaymentMethod(
                     paymentMethod.id,
@@ -37,5 +40,7 @@ export class PaymentMethodsService {
         }, error => {
             console.log(error);
         });
+
+        return request;
     }
 }
